@@ -22,9 +22,13 @@ class Moi
       toJp = "ja"
       toEn = "EN"
 
-      parse JSON.parse(http(toEn).string).to_xml(:root => :my_root)
-      jParse JSON.parse(http(toJp).string).to_xml(:root => :my_root)
+      parse generateXml toEn
+      jParse generateXml toJp
     end
+  end
+
+  def generateXml(toLang)
+     return JSON.parse(http(toLang).string).to_xml(:root => :my_root)
   end
 
   def parse(src)
